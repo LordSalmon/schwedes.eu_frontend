@@ -19,11 +19,23 @@
 
 <script lang="ts">
 import Vue from "vue";
-import {ICredential} from "~/logic/ICredential";
+import {Credential} from "~/logic/Credential";
 
 export default Vue.extend({
   name: "credentials",
   mounted() {
+    this.credentials.push(
+      {
+        title: "Trilliun",
+        subtitle: "Von Schüler für Schulen",
+        description: "Eine Lösung Schulen, um die Finanzbewegungen der Schüler zentral zu verwalten.",
+        endedAt: new Date(),
+        isActive: true,
+        role: "Fullstack",
+        showWeb: true,
+        url: "https://trilliun.eu",
+        startedAt: new Date()
+      });
     setTimeout(() => {
       this.credentialsTextShown = true;
     }, 500);
@@ -35,32 +47,7 @@ export default Vue.extend({
     return {
       credentialsTextShown: false,
       credentialsShown: false,
-      credentials: [
-        {
-          id: "tri",
-          title: "Trilliun",
-          subtitle: "Von Schülern für Schulen!",
-          role: "Fullstack Entwickler",
-          description: "Trilliun ist eine Lösung für Schulen, die die Finanzbewegungen ihrer Schüler zentralisiert einsehen und bearbeiten wollen.",
-          url: "https://trilliun.eu",
-        } as ICredential,
-        {
-          id: "tri2",
-          title: "Trilliun",
-          subtitle: "Von Schülern für Schulen!",
-          role: "Fullstack Entwickler",
-          description: "Trilliun ist eine Lösung für Schulen, die die Finanzbewegungen ihrer Schüler zentralisiert einsehen und bearbeiten wollen.",
-          url: "https://trilliun.eu",
-        } as ICredential,
-        {
-          id: "tri3",
-          title: "Trilliun",
-          subtitle: "Von Schülern für Schulen!",
-          role: "Fullstack Entwickler",
-          description: "Trilliun ist eine Lösung für Schulen, die die Finanzbewegungen ihrer Schüler zentralisiert einsehen und bearbeiten wollen.",
-          url: "https://trilliun.eu",
-        } as ICredential,
-      ]
+      credentials: new Array<Credential>(),
     };
   }
 });

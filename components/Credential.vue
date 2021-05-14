@@ -9,12 +9,17 @@
 
 <script lang="ts">
 import Vue from "vue";
-import {ICredential} from "~/logic/ICredential";
+import {Credential} from "~/logic/Credential";
 
 export default Vue.extend({
   name: "Credential",
   props: {
-    credential: ICredential
+    credential: Object
+  },
+  data() {
+    return {
+      givenCredential: new Credential(this.credential)
+    };
   }
 });
 </script>
