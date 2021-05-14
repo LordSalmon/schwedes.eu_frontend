@@ -1,6 +1,6 @@
 <template>
-  <div class="footer box-border px-8 flex justify-between items-center">
-    <div class="flex justify-start items-center">
+  <div class="footer box-border px-8 flex flex-col md:flex-row justify-start md:justify-between items-center">
+    <div class="flex justify-start items-center mb-6 md:mb-0">
       <NuxtLink to="/imprint" class="footer-element">
         <span>> Impressum</span>
       </NuxtLink>
@@ -55,6 +55,11 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
+
+.footer {
+  @apply h-28 md:h-32;
+}
+
 .social-media-button {
   @apply w-10 h-10 rounded mx-4 border-2 flex justify-center items-center duration-200;
   border-color: var(--color);
@@ -69,7 +74,15 @@ export default Vue.extend({
 }
 
 .footer-element {
-  @apply text-gray-400 mx-8 cursor-pointer select-none duration-100;
+  @apply text-gray-400 cursor-pointer select-none duration-100 whitespace-nowrap;
+  margin: 0 2rem;
+  &:first-child {
+    margin: 0 2rem 0 0;
+  }
+
+  &:last-child {
+    margin: 0 0 0 2rem;
+  }
 
   &:hover {
     @apply underline text-gray-300;

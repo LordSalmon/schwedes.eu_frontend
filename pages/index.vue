@@ -1,12 +1,12 @@
 <template>
-   <div class="page-wrapper">
-      <Background class="fixed top-0 left-0 w-screen h-screen" />
-      <div class="default-wrapper fixed top-0 left-0 w-screen h-screen overflow-x-hidden overflow-y-auto">
-          <Navbar />
-          <Nuxt />
-          <Footer />
-      </div>
-   </div>
+  <div class="page-wrapper" :style="{'min-height': appHeight, 'min-width': appWidth}">
+    <Background class="fixed top-0 left-0 w-screen h-full"/>
+    <div class="default-wrapper fixed top-0 left-0 w-screen overflow-auto h-full">
+      <Navbar/>
+      <Nuxt/>
+      <Footer/>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -16,12 +16,22 @@ import Footer from "@/components/Footer.vue";
 import Navbar from "@/components/Navbar.vue";
 
 export default Vue.extend({
-    components: {Background, Footer, Navbar},
-    head() {
-        return {
-            title: "Schwedes Solutions"
-        }
+  components: {Background, Footer, Navbar},
+  head() {
+    return {
+      title: "Schwedes Solutions"
     }
+  },
+  mounted() {
+    this.appHeight = window.innerHeight;
+    this.appWidth = window.innerWidth;
+  },
+  data() {
+    return {
+      appHeight: 0,
+      appWidth: 0
+    };
+  }
 });
 </script>
 
@@ -34,9 +44,9 @@ export default Vue.extend({
 }
 
 .default-wrapper {
-    display: grid;
-    grid-template: "navbar" "router" "footer";
-    grid-template-columns: 1fr;
-    grid-template-rows: min-content 1fr 8rem;
+  display: grid;
+  grid-template: "navbar" "router" "footer";
+  grid-template-columns: 1fr;
+  grid-template-rows: min-content 1fr min-content;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-full flex flex-col justify-start items-center select-none overflow-hidden">
-    <div class="mt-24">
+    <div class="mt-4 md:mt-12">
       <transition name="fade">
         <span v-if="credentialsTextShown" class="text-4xl font-semibold text-gray-200 block mb-12">Referenzen:</span>
       </transition>

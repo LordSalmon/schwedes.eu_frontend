@@ -1,10 +1,12 @@
 <template>
   <div class="flex flex-col justify-start items-center">
-    <div class="mt-24 flex justify-start items-center select-none">
-      <span class="text-3xl text-gray-300">Dein Ansprechpartner für </span>
-      <span class="ml-2 text-3xl text-gray-100 font-semibold">{{ getCurrentSloganText() }}</span>
-      <span class="assignment-title-dash"></span>
-    </div>
+    <transition name="fade">
+      <div class="mt-4 md:mt-12 flex justify-start items-center select-none" v-if="titleShown">
+        <span class="text-2xl md:text-3xl text-gray-300">Dein Ansprechpartner für </span>
+        <span class="ml-2 text-3xl text-gray-100 font-semibold">{{ getCurrentSloganText() }}</span>
+        <span class="assignment-title-dash"></span>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -14,6 +16,9 @@ import Vue from "vue";
 export default Vue.extend({
   name: "assignments",
   mounted() {
+    setTimeout(() => {
+      this.titleShown = true;
+    }, 550);
     // @ts-ignore
     this.interval = setInterval(() => {
       if (this.isOuterTimeout) return;
@@ -57,6 +62,7 @@ export default Vue.extend({
       },
       isInnerTimeout: false,
       isOuterTimeout: false,
+      titleShown: false,
     };
   },
   methods: {

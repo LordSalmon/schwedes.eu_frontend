@@ -1,26 +1,41 @@
 <template>
-  <div class="navbar">
-    <div class="navbar-buttons">
-      <NuxtLink to="/" class="navbar-element">
-        <span>Start</span>
-      </NuxtLink>
-      <NuxtLink to="/assignments" class="navbar-element">
-        <span>Aufträge</span>
-      </NuxtLink>
-      <NuxtLink to="/credentials" class="navbar-element">
-        <span>Referenzen</span>
-      </NuxtLink>
-      <NuxtLink to="/projects" class="navbar-element">
-        <span>Projekte</span>
-      </NuxtLink>
-      <NuxtLink to="/aboutme" class="navbar-element">
-        <span>Über mich</span>
-      </NuxtLink>
-      <NuxtLink to="/contact" class="navbar-contact px-3 py-1 rounded flex justify-center items-center bg-blue-600 cursor-pointer hover:bg-blue-500 duration-150 active:bg-blue-700 select-none">
-        <span class="fas fa-paper-plane mr-3 text-xl"></span>
-        <span class="text-xl">Kontakt</span>
-      </NuxtLink>
+  <div class="navbar" :style="{'h-96': isExpanded, 'h-32': !isExpanded}">
+    <div class="flex w-full h-28 justify-end items-center box-border block md:hidden duration-200">
+      <div class="menu-button" :class="{expanded: isExpanded}" @click="isExpanded = !isExpanded">
+        <span class="menu-dash menu-1"></span>
+        <span class="menu-dash menu-2"></span>
+        <span class="menu-dash menu-3"></span>
+      </div>
     </div>
+    <transition name="navbar">
+      <div class="navbar-buttons" v-if="isExpanded">
+        <NuxtLink to="/" class="navbar-element" @click.native="minimizeNavbar()">
+          <span>Start</span>
+        </NuxtLink>
+        <NuxtLink to="/assignments" class="navbar-element" @click.native="minimizeNavbar()">
+          <span>Aufträge</span>
+        </NuxtLink>
+        <NuxtLink to="/credentials" class="navbar-element" @click.native="minimizeNavbar()">
+          <span>Referenzen</span>
+        </NuxtLink>
+        <NuxtLink to="/projects" class="navbar-element" @click.native="minimizeNavbar()">
+          <span>Projekte</span>
+        </NuxtLink>
+        <NuxtLink to="/aboutme" class="navbar-element" @click.native="minimizeNavbar()">
+          <span>Über mich</span>
+        </NuxtLink>
+        <div class="flex justify-center items-center" @click.native="minimizeNavbar()">
+          <NuxtLink
+            to="/contact"
+            class="navbar-contact px-3 py-1 rounded flex w-min justify-center items-center bg-blue-600 cursor-pointer hover:bg-blue-500 duration-150 active:bg-blue-700 select-none mt-4 md:mt-0"
+            @click.native="minimizeNavbar()"
+          >
+            <span class="fas fa-paper-plane mr-3 text-xl"></span>
+            <span class="text-xl">Kontakt</span>
+          </NuxtLink>
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -29,48 +44,110 @@ import Vue from 'vue'
 
 export default Vue.extend({
   name: "Navbar",
+  mounted() {
+    this.currentSize = window.innerWidth;
+    this.minimizeNavbar();
+    window.addEventListener("resize", (event: any) => {
+      if (event.path[0].innerWidth > 768) this.isExpanded = true;
+      if (event.path[0].innerWidth <= 768 && this.currentSize > 768) this.isExpanded = false;
+      this.currentSize = event.path[0].innerWidth;
+    });
+  },
   data() {
     return {
-      shown: true,
+      isExpanded: false,
+      currentSize: 0
     };
+  },
+  methods: {
+    minimizeNavbar(): void {
+      this.isExpanded = this.currentSize > 768;
+    }
   }
 })
 </script>
 
 <style lang="scss" scoped>
 .navbar {
-  height: 8rem;
+  @apply md:h-24 flex justify-start items-center md:justify-end flex-col box-border px-8;
 
   .navbar-buttons {
-    @apply flex justify-end items-center box-border px-8 text-white w-full h-full;
-  }
+    @apply justify-start flex-col flex md:justify-end md:flex-row box-border text-white w-full h-full;
 
-  .navbar-contact {
-    @apply ml-8;
-  }
-}
+    .navbar-element {
+      @apply flex justify-center items-center text-lg px-8 cursor-pointer duration-200 select-none h-12 h-full whitespace-nowrap py-4 md:py-0;
 
-@media screen and (max-width: 875px) {
-  .navbar {
-    height: 20rem;
-
-    .navbar-buttons {
-      @apply mt-8 flex flex-col justify-start items-center box-border px-8 text-white h-full w-full;
-      .navbar-element {
-        @apply py-4;
-      }
-
-      .navbar-contact {
-        @apply m-0 mt-4;
+      &:hover {
+        @apply text-xl;
       }
     }
+
   }
 }
 
-.navbar-element {
-  @apply text-lg px-8 cursor-pointer duration-200 select-none;
-  &:hover {
-    @apply text-xl;
+.expanded {
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: max-content;
+
+  .menu-1 {
+    position: absolute;
+    transform: rotate(45deg);
+    top: 75%;
+  }
+
+  .menu-2 {
+    position: absolute;
+    opacity: 0;
+  }
+
+  .menu-3 {
+    position: absolute;
+    transform: rotate(-45deg);
+    top: 75%;
   }
 }
+
+.menu-button {
+  width: 2rem;
+  height: 1.25rem;
+  @apply flex flex-col justify-between items-center cursor-pointer;
+  box-sizing: border-box;
+
+  .menu-dash {
+    height: 3px;
+    border-radius: 2px;
+    @apply w-full bg-gray-200 duration-200;
+  }
+}
+
+.navbar-enter-active {
+  transition: all 0.75s;
+}
+
+.navbar-leave-active {
+  transition: all 0.5s;
+}
+
+.navbar-enter {
+  transform: translateY(-100%);
+  opacity: 0.25;
+}
+
+.navbar-enter-to {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.navbar-leave {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.navbar-leave-to {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+
 </style>

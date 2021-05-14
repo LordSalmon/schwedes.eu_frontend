@@ -8,6 +8,12 @@
   max-width: 30vw;
 }
 
+@media (max-width: 875px) {
+
+  :root {
+    font-size: 14px;
+  }
+}
 
 ::-webkit-scrollbar {
   background-color: transparent;
@@ -33,6 +39,21 @@
 }
 
 .fade-enter-to {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+.route-enter-active {
+  transition: all 0.5s;
+}
+
+.route-enter {
+  opacity: 0;
+  transform: translateY(-1rem);
+}
+
+.route-enter-to {
   opacity: 1;
   transform: translateY(0);
 }

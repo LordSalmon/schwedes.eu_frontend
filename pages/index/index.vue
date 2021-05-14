@@ -1,14 +1,15 @@
 <template>
-  <div class="flex flex-col justify-start items-center mt-40">
+  <transition name="route">
+    <div class="flex flex-col justify-start items-center mt-16 md:mt-40">
     <div class="flex flex-col items-center justify-start">
       <transition name="fade">
             <span
               v-if="welcomeTextShown"
-              class="text-6xl text-gray-300 font-semibold select-none welcome-text duration-200"
+              class="text-5xl md:text-6xl text-gray-300 font-semibold select-none welcome-text duration-200"
             >Schwedes Solutions</span>
       </transition>
       <transition name="fade">
-        <span v-if="subtitleShown" class="text-2xl text-gray-400 select-none mt-4 mb-20">fündig geworden ohne gesucht zu haben!</span>
+        <span v-if="subtitleShown" class="text-xl md:text-2xl text-gray-400 select-none mt-4 mb-20">Fündig geworden, ohne gesucht zu haben!</span>
       </transition>
     </div>
     <transition name="fade">
@@ -21,6 +22,7 @@
       </NuxtLink>
     </transition>
   </div>
+  </transition>
 </template>
 
 <script lang="ts">
@@ -34,6 +36,7 @@ export default Vue.extend({
       assignmentsButtonShown: false
     };
   },
+  transition: "route",
   mounted() {
     setTimeout(() => {
       this.welcomeTextShown = true;

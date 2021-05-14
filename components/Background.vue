@@ -115,7 +115,7 @@ export default Vue.extend({
 
 @keyframes fall {
   to {
-    transform: translate3d(-30em, 0, 0);
+    transform: translate3d(-40em, 0, 0);
   }
 }
 
