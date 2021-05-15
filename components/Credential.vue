@@ -26,12 +26,9 @@ export default Vue.extend({
 
 <style scoped lang="scss">
 .credential {
-  @apply box-border p-4 rounded bg-gray-400 bg-opacity-50 mb-8;
+  @apply box-border p-4 rounded bg-gray-400 bg-opacity-50 mb-8 w-9/10 md:w-1/2;
   overflow: hidden;
   height: min-content;
-  min-width: 30rem;
-  max-width: 70%;
-  width: max-content;
   -webkit-box-shadow: -9px 10px 28px -10px rgb(27, 29, 49);
   -moz-box-shadow: -9px 10px 28px -10px  rgb(27, 29, 49);
   box-shadow: -9px 10px 28px -10px  rgb(27, 29, 49);

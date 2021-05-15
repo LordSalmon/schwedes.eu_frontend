@@ -1,19 +1,24 @@
 <template>
-  <div class="w-full h-full flex flex-col justify-start items-center select-none overflow-hidden">
-    <div class="mt-4 md:mt-12">
+  <div class="w-full h-full">
+    <div
+      class="w-full h-full flex flex-col justify-start items-center select-none overflow-hidden"
+      v-if="$store.getters.canRender"
+    >
+      <div class="md:mt-12" :class="{'mt-0': $store.state.isNavbarExpanded, 'mt-8': $store.state.isNavbarExpanded}">
+        <transition name="fade">
+          <span v-if="credentialsTextShown" class="text-4xl font-semibold text-gray-200 block mb-4 md:mb-12">Referenzen:</span>
+        </transition>
+      </div>
       <transition name="fade">
-        <span v-if="credentialsTextShown" class="text-4xl font-semibold text-gray-200 block mb-12">Referenzen:</span>
-      </transition>
-    </div>
-    <transition name="fade">
-      <div class="credential-container w-full overflow-hidden relative" v-if="credentialsShown">
-        <div class="background-fade w-full h-full">
-          <div class="h-full w-full overflow-x-hidden overflow-y-auto flex justify-start flex-col items-center pb-40 pt-16">
-            <Credential v-for="credential in credentials" :key="credential.id" :credential="credential"/>
+        <div class="credential-container w-full overflow-hidden relative" v-if="credentialsShown">
+          <div class="background-fade w-full h-full">
+            <div class="h-full w-full overflow-x-hidden overflow-y-auto flex justify-start flex-col items-center pb-40 pt-16">
+              <Credential v-for="credential in credentials" :key="credential.id" :credential="credential"/>
+            </div>
           </div>
         </div>
-      </div>
-    </transition>
+      </transition>
+    </div>
   </div>
 </template>
 
@@ -27,7 +32,7 @@ export default Vue.extend({
     this.credentials.push(
       {
         title: "Trilliun",
-        subtitle: "Von Schüler für Schulen",
+        subtitle: "Von Schülern für Schulen",
         description: "Eine Lösung Schulen, um die Finanzbewegungen der Schüler zentral zu verwalten.",
         endedAt: new Date(),
         isActive: true,
@@ -49,7 +54,7 @@ export default Vue.extend({
       credentialsShown: false,
       credentials: new Array<Credential>(),
     };
-  }
+  },
 });
 </script>
 

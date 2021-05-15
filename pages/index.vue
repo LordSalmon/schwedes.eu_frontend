@@ -1,5 +1,5 @@
 <template>
-  <div class="page-wrapper" :style="{'min-height': appHeight, 'min-width': appWidth}">
+  <div class="page-wrapper" :style="{'min-height': $store.state.appHeight, 'min-width': $store.state.appWidth}">
     <Background class="fixed top-0 left-0 w-screen h-full"/>
     <div class="default-wrapper fixed top-0 left-0 w-screen overflow-auto h-full">
       <Navbar/>
@@ -23,15 +23,11 @@ export default Vue.extend({
     }
   },
   mounted() {
-    this.appHeight = window.innerHeight;
-    this.appWidth = window.innerWidth;
+    window.addEventListener("resize", () => {
+      this.$store.commit("setAppDimensions", window.innerWidth, window.innerHeight);
+    });
+    this.$store.commit("setAppDimensions", window.innerWidth, window.innerHeight);
   },
-  data() {
-    return {
-      appHeight: 0,
-      appWidth: 0
-    };
-  }
 });
 </script>
 

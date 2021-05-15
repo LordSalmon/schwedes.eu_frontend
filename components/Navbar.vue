@@ -1,14 +1,14 @@
 <template>
-  <div class="navbar" :style="{'h-96': isExpanded, 'h-32': !isExpanded}">
+  <div class="navbar" :style="{'h-96': $store.state.isNavbarExpanded, 'h-32': !$store.state.isNavbarExpanded}">
     <div class="flex w-full h-28 justify-end items-center box-border block md:hidden duration-200">
-      <div class="menu-button" :class="{expanded: isExpanded}" @click="isExpanded = !isExpanded">
+      <button class="menu-button" :class="{expanded: $store.state.isNavbarExpanded}" @click="toggleNavbarState()">
         <span class="menu-dash menu-1"></span>
         <span class="menu-dash menu-2"></span>
         <span class="menu-dash menu-3"></span>
-      </div>
+      </button>
     </div>
     <transition name="navbar">
-      <div class="navbar-buttons" v-if="isExpanded">
+      <div class="navbar-buttons" v-if="$store.state.isNavbarExpanded">
         <NuxtLink to="/" class="navbar-element" @click.native="minimizeNavbar()">
           <span>Start</span>
         </NuxtLink>
@@ -24,7 +24,7 @@
         <NuxtLink to="/aboutme" class="navbar-element" @click.native="minimizeNavbar()">
           <span>Über mich</span>
         </NuxtLink>
-        <div class="flex justify-center items-center" @click.native="minimizeNavbar()">
+        <div class="flex justify-center items-center">
           <NuxtLink
             to="/contact"
             class="navbar-contact px-3 py-1 rounded flex w-min justify-center items-center bg-blue-600 cursor-pointer hover:bg-blue-500 duration-150 active:bg-blue-700 select-none mt-4 md:mt-0"
@@ -44,24 +44,31 @@ import Vue from 'vue'
 
 export default Vue.extend({
   name: "Navbar",
+  created() {
+  },
   mounted() {
     this.currentSize = window.innerWidth;
     this.minimizeNavbar();
     window.addEventListener("resize", (event: any) => {
-      if (event.path[0].innerWidth > 768) this.isExpanded = true;
-      if (event.path[0].innerWidth <= 768 && this.currentSize > 768) this.isExpanded = false;
+      if (event.path[0].innerWidth > 768) this.setNavbarState(true);
+      if (event.path[0].innerWidth <= 768 && this.currentSize > 768) this.setNavbarState(false);
       this.currentSize = event.path[0].innerWidth;
     });
   },
   data() {
     return {
-      isExpanded: false,
       currentSize: 0
     };
   },
   methods: {
     minimizeNavbar(): void {
-      this.isExpanded = this.currentSize > 768;
+      this.setNavbarState(this.currentSize > 768);
+    },
+    setNavbarState(val: boolean): void {
+      this.$store.commit("setNavbarState", val);
+    },
+    toggleNavbarState(): void {
+      this.$store.commit("setNavbarState", !this.$store.state.isNavbarExpanded);
     }
   }
 })
@@ -114,6 +121,7 @@ export default Vue.extend({
   height: 1.25rem;
   @apply flex flex-col justify-between items-center cursor-pointer;
   box-sizing: border-box;
+  outline: 0;
 
   .menu-dash {
     height: 3px;

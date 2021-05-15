@@ -1,10 +1,17 @@
 <template>
   <div class="flex flex-col justify-start items-center">
     <transition name="fade">
-      <div class="mt-4 md:mt-12 flex justify-start items-center select-none" v-if="titleShown">
+      <div class="mt-4 md:mt-12 flex justify-start items-center select-none mb-12" v-if="titleShown">
         <span class="text-2xl md:text-3xl text-gray-300">Dein Ansprechpartner für </span>
         <span class="ml-2 text-3xl text-gray-100 font-semibold">{{ getCurrentSloganText() }}</span>
         <span class="assignment-title-dash"></span>
+      </div>
+    </transition>
+    <transition name="fade">
+      <div class="card-container" v-if="cardsShown">
+        <div class="card" v-for="card of cards" :key="card.id">
+
+        </div>
       </div>
     </transition>
   </div>
@@ -19,6 +26,9 @@ export default Vue.extend({
     setTimeout(() => {
       this.titleShown = true;
     }, 550);
+    setTimeout(() => {
+      this.cardsShown = true;
+    }, 1050);
     // @ts-ignore
     this.interval = setInterval(() => {
       if (this.isOuterTimeout) return;
@@ -60,9 +70,11 @@ export default Vue.extend({
         isGrowing: true,
         position: 0,
       },
+      cards: new Array<Card>(),
       isInnerTimeout: false,
       isOuterTimeout: false,
       titleShown: false,
+      cardsShown: false
     };
   },
   methods: {
