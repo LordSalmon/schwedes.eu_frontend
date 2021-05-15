@@ -1,6 +1,6 @@
 <template>
   <transition name="route">
-    <div class="flex flex-col justify-start items-center mt-16 md:mt-40">
+    <div class="flex flex-col justify-start items-center mt-4 md:mt-40">
     <div class="flex flex-col items-center justify-start">
       <transition name="fade">
             <span

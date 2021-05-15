@@ -47,8 +47,7 @@ export default Vue.extend({
 
 .meteor-container {
   position: fixed;
-  top: 0;
-  left: 0;
+  @apply top-100 left-100 md:top-0 md:left-0;
   width: 110%;
   height: 150%;
   transform: rotate(225deg) translateX(5vw);
