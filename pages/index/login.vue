@@ -1,10 +1,10 @@
 <template>
   <div class="login flex justify-center items-start">
-    <div class="my-40 box-border p-4 bg-gray-200 rounded bg-opacity-10">
-      <div class="flex justify-start items-center my-8">
+    <div class="mt-8 md:mt-20 box-border p-4 bg-gray-200 rounded bg-opacity-10">
+      <div class="flex justify-center items-center my-8">
         <DInput label="Email:" v-model="email" @enter="submit()" />
       </div>
-      <div class="flex justify-start items-center my-8">
+      <div class="flex justify-center items-center my-8">
           <DInput label="Password:" v-model="password" type="password" @enter="submit()" />
       </div>
       <div class="flex justify-end items-center pt-2">
