@@ -1,21 +1,21 @@
 <template>
-  <transition name="route">
-    <div>
+  <div class="w-full h-full">
+    <div class="w-full h-full" v-if="$store.getters.canRender">
       <transition name="show">
         <div class="flex justify-start flex-col items-center" v-if="shown">
-          <div class="mt-24 flex justify-center items-center mb-8">
+          <div class="mt-0 md:mt-12 flex justify-center items-center mb-8">
             <span class="text-4xl font-semibold select-none">Kontakt:</span>
           </div>
-          <div class="box-border p-4 bg-opacity-10 bg-gray-200 rounded">
+          <div class="box-border p-4 bg-opacity-10 bg-gray-200 rounded w-9/10 md:w-6/12 mb-8">
             <div class="contact-element">
               <DInput label="Name:" v-model="name"/>
             </div>
             <div class="contact-element">
               <DInput label="Email:" v-model="email"/>
             </div>
-            <div class="contact-element">
+            <div class="contact-element w-full">
               <span class="mb-4">Nachricht:</span>
-              <textarea class="default-text-area content" v-model="content"></textarea>
+              <textarea class="bg-gray-200 bg-opacity-20 rounded border-gray-400 border-2 content outline-none box-border p-1 min-w-full" v-model="content"></textarea>
             </div>
             <div class="flex justify-center items-center py-4">
               <button class="send-button rounded px-4 py-2 bg-blue-600 duration-150 hover:bg-blue-500 active:bg-blue-700 select-none">
@@ -26,7 +26,7 @@
         </div>
       </transition>
     </div>
-  </transition>
+  </div>
 </template>
 
 <script>
@@ -57,7 +57,7 @@ export default Vue.extend({
 }
 
 .contact-element {
-  @apply my-12 flex flex-col justify-start items-start;
+  @apply my-12 flex flex-col justify-start items-center;
 }
 
 .content {

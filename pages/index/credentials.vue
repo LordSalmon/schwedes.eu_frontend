@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-full">
     <div
-      class="w-full h-full flex flex-col justify-start items-center select-none overflow-hidden"
+      class="w-full h-full flex flex-col justify-start items-center select-none"
       v-if="$store.getters.canRender"
     >
       <div class="md:mt-12" :class="{'mt-0': $store.state.isNavbarExpanded, 'mt-8': $store.state.isNavbarExpanded}">
@@ -10,11 +10,9 @@
         </transition>
       </div>
       <transition name="fade">
-        <div class="credential-container w-full overflow-hidden relative" v-if="credentialsShown">
-          <div class="background-fade w-full h-full">
-            <div class="h-full w-full overflow-x-hidden overflow-y-auto flex justify-start flex-col items-center pb-40 pt-16">
-              <Credential v-for="credential in credentials" :key="credential.id" :credential="credential"/>
-            </div>
+        <div class="credential-container w-full h-full relative" v-if="credentialsShown">
+          <div class="h-full w-full flex justify-start flex-col items-center pb-20 pt-16">
+            <Credential v-for="credential in credentials" :key="credential.id" :credential="credential"/>
           </div>
         </div>
       </transition>
@@ -33,13 +31,25 @@ export default Vue.extend({
       {
         title: "Trilliun",
         subtitle: "Von Schülern für Schulen",
-        description: "Eine Lösung Schulen, um die Finanzbewegungen der Schüler zentral zu verwalten.",
+        description: "Eine Software-Lösung für Schulen, um die Finanzbewegungen der Schüler zentralisiert zu verwalten.",
+        startedAt: new Date(2019, 1, 1),
         endedAt: new Date(),
         isActive: true,
         role: "Fullstack",
-        showWeb: true,
-        url: "https://trilliun.eu",
-        startedAt: new Date()
+        showWeb: false,
+        url: "https://trilliun.eu"
+      });
+    this.credentials.push(
+      {
+        title: "Physical Education Assistant",
+        subtitle: "",
+        description: "Erstelle Übungen, Trainingseinheiten und Schulstunden oder verwende von anderen bereitgestellte Vorlagen.",
+        startedAt: new Date(2019, 1, 1),
+        endedAt: new Date(),
+        isActive: true,
+        role: "Fullstack",
+        showWeb: false,
+        url: "https://pe-assistant.school"
       });
     setTimeout(() => {
       this.credentialsTextShown = true;
@@ -59,10 +69,6 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
-.background-fade {
-  mask: linear-gradient(to bottom, black 80%, transparent 100%), linear-gradient(to top, transparent 95%, black 100%);
-  mask-composite: exclude;
-}
 
 .credential-container {
   height: 100%;

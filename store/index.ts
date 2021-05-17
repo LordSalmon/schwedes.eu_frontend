@@ -8,9 +8,9 @@ export const mutations = {
   setNavbarState(state: any, newValue: boolean) {
     state.isNavbarExpanded = newValue;
   },
-  setAppDimensions(state: any, width: number, height: number) {
-    state.appHeight = height;
-    state.appWidth = width;
+  setAppDimensions(state: any, dimensions: {width: number, height: number}) {
+    state.appHeight = dimensions.height;
+    state.appWidth = dimensions.width;
   }
 }
 

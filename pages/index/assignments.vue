@@ -19,6 +19,7 @@
 
 <script lang="ts">
 import Vue from "vue";
+import {Card} from "~/logic/Card";
 
 export default Vue.extend({
   name: "assignments",
@@ -64,7 +65,7 @@ export default Vue.extend({
   data() {
     return {
       interval: undefined,
-      slogans: ["Frontend.", "Backend.", "Fullstack.", "Algorithmik."],
+      slogans: ["Frontend.", "Backend.", "Fullstack.", "3D-Druck.", "Algorithmik."],
       sloganObj: {
         index: 0,
         isGrowing: true,

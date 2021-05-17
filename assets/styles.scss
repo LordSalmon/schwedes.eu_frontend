@@ -58,3 +58,14 @@
   opacity: 1;
   transform: translateY(0);
 }
+
+@mixin boxShadow($x, $y, $spread, $blur, $color) {
+  box-shadow: $x $y $spread $blur $color;
+  -webkit-box-shadow: $x $y $spread $blur $color;
+  -moz-box-shadow: $x $y $spread $blur $color;
+  -o-box-shadow: $x $y $spread $blur $color;
+}
+
+.blur-page {
+  mask-image: linear-gradient(to top, black 90%, transparent 100%);
+}

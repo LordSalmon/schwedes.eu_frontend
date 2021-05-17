@@ -1,5 +1,5 @@
 <template>
-  <div class="footer box-border px-8 flex flex-col md:flex-row justify-start md:justify-between items-center">
+  <div class="footer box-border px-8 flex flex-col md:flex-row justify-start md:justify-between items-center mt-4 md:mt-0">
     <div class="flex justify-start items-center mb-6 md:mb-0">
       <NuxtLink to="/imprint" class="footer-element">
         <span>> Impressum</span>
