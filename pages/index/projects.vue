@@ -1,10 +1,12 @@
 <template>
-<div>
-  <span>Projekts</span>
+<div class="flex justify-center items-start mt-4 md:mt-12">
+  <div class="project-card">
+      <span>RUNE - Smarthome</span>
+  </div>
 </div>
 </template>
 
-<script>
+<script lang="ts">
 import Vue from "vue";
 
 export default Vue.extend({
@@ -12,6 +14,8 @@ export default Vue.extend({
 });
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+.project-card {
+    @apply flex flex-col justify-start items-center box-border p-4 rounded bg-gray-300 bg-opacity-30;
+}
 </style>

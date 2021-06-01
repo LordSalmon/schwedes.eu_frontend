@@ -1,11 +1,14 @@
 <template>
-  <div class="footer box-border px-8 flex flex-col md:flex-row justify-start md:justify-between items-center mt-4 md:mt-0">
-    <div class="flex justify-start items-center mb-6 md:mb-0">
+  <div class="footer box-border px-8 flex flex-col md:flex-row justify-start md:justify-between items-center mt-4 md:mt-0 mb-8 md:mb-0">
+    <div class="flex justify-center md:justify-start items-center mb-6 md:mb-0 flex-wrap">
       <NuxtLink to="/imprint" class="footer-element">
         <span>> Impressum</span>
       </NuxtLink>
       <NuxtLink to="/privacy" class="footer-element">
         <span>> Datenschutz</span>
+      </NuxtLink>
+      <NuxtLink to="/i" class="footer-element">
+      <span>> Internal</span>
       </NuxtLink>
       <NuxtLink to="/login" class="footer-element">
         <span>> Login</span>
@@ -74,7 +77,7 @@ export default Vue.extend({
 }
 
 .footer-element {
-  @apply text-gray-400 cursor-pointer select-none duration-100 whitespace-nowrap;
+  @apply text-gray-400 cursor-pointer select-none duration-100 whitespace-nowrap w-1/3 md:w-min;
   margin: 0 2rem;
   &:first-child {
     margin: 0 2rem 0 0;
